@@ -1,7 +1,7 @@
 'use strict';
 
 function getParks(input, maxResults) {
-  fetch(`https://developer.nps.gov/api/v1/parks?q=${input}&limit=${maxResults}&api_key=QThr6EVLHvgBVnWwfVwsZ4TiDej0g7OYDLN7VXMC`)
+  fetch(`https://developer.nps.gov/api/v1/parks?StateCode=${input}&limit=${maxResults}&api_key=QThr6EVLHvgBVnWwfVwsZ4TiDej0g7OYDLN7VXMC`)
     .then(response => response.json())
     .then(responseJson => 
       displayResults(responseJson))
@@ -18,7 +18,7 @@ function displayResults(responseJson) {
 function watchForm() {
   $('form').submit(event => {
     event.preventDefault();
-    let input = $(".text").val();
+    let input = $(".text").val().split(", ");
      let maxResults = $(".max-results").val();
     getParks(input, maxResults);
     $('.results').empty();
